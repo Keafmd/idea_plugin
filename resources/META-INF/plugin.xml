@@ -2,7 +2,7 @@
     <id>io.github.rxf113</id>
     <name>rxf113Utils</name>
     <vendor email="1131310577@qq.com" url="http://www.rxf113.xyz">rxf113</vendor>
-    <version>0.0.2</version>
+    <version>0.0.4</version>
     <idea-version since-build="193" until-build="213.*"/>
     <depends>com.intellij.java</depends>
     <description>
@@ -13,6 +13,7 @@
      <p>Hump ​​to underline</p>
      <p>Underline to Hump</p>
      <p>mysql ddl data fields to java entity fields</p>
+     <p>properties to yml</p>
     ]]>
     </description>
 
@@ -48,6 +49,11 @@
             <action id="MySql2Fields" class="com.rxf113.MySql2FieldsAction" text="MySql2Fields"
                     description="Sql2Fields">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl C"/>
+            </action>
+
+            <action id="Properties2Yml" class="com.rxf113.Properties2YmlAction" text="Properties2Yml"
+                    description="Properties2Yml">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl M"/>
             </action>
         </group>
     </actions>
