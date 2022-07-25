@@ -1,5 +1,6 @@
 package com.rxf113.utils;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 
 import java.util.HashMap;
@@ -27,10 +28,14 @@ public class Properties2YmlUtil {
 
     public static String properties2YmlStr(String proStr) {
         //按行拆分properties字符串
-        String[] proStrArr = proStr.split("\\s+");
+        String[] proStrArr = proStr.split("\\n");
         Map<String, Object> globalMap = new HashMap<>(8, 1);
         for (String line : proStrArr) {
-            recMap(line, globalMap);
+            //排除注释
+            if(!line.matches("^\\s*$") && !line.matches("^\\s*#.*$")){
+                recMap(line, globalMap);
+            }
+
         }
         return extractVal(globalMap, 0);
     }
@@ -72,12 +77,15 @@ public class Properties2YmlUtil {
         for (Map.Entry<String, Object> entry : map.entrySet()) {
             String key = entry.getKey();
             Object value = entry.getValue();
-            sb.append(" ".repeat(blankSpace));
+            if (blankSpace == 0 && sb.length() > 0){
+                sb.append("\r\n");
+            }
+            sb.append(Strings.repeat(" ",blankSpace));
             sb.append(key).append(":");
             if (!(value instanceof String)) {
                 sb.append("\r\n").append(extractVal((Map<String, Object>) value, blankSpace + 1));
             } else {
-                sb.append(" ").append(value).append("\r\n".repeat(2));
+                sb.append(" ").append(value).append("\r\n");
             }
         }
         return sb.toString();

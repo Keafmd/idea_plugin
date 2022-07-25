@@ -21,10 +21,9 @@ public class CsvFormatCheckProcessor implements FormatCheckProcessor {
             return false;
         }
         sqlStr = sqlStr.replaceAll("[`']","");
-        sqlStr = sqlStr.replaceAll("(.*)\\n(.*)", "$1 $2");
-
-        String[] rows = sqlStr.split(",");
+        String[] rows = sqlStr.split("\n");
         for (String row : rows) {
+            row = row.replaceAll("(.*)\\n(.*)", "$1 $2");
             if (!ROW_PATTERN.matcher(row).matches()) {
                 return false;
             }
